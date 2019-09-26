@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name STM32WB55Cx_bb)(type KiCad)(uri ${KIPRJMOD}/STM32WB55Cx_bb.pretty)(options "")(descr ""))
+)
