@@ -1,0 +1,28 @@
+Part ID,Part type,Part size,Part value,Example Digikey Item,Cost (qty: x),Comment
+AE1,Antenna,Custom,Unictron H2U262GKBA0100,https://www.digikey.com/short/p2h8zn,$0.64,"Trace antennas are cheaper, but this seemed like a less failure-prone option for a first attempt."
+C1,Capacitor,0402,0.8 pF,https://www.digikey.com/short/p2hrp7,$0.15,"50Ω matching filter capacitor. I used the values from ST's evaluation board, figuring they'd probably be fairly close. Ideal values will vary based on your board stackup. Prefer high-quality ceramic capacitors (C0G/NP0)"
+C2,Capacitor,0402,0.3 pF,https://www.digikey.com/short/p2hrjw,$0.19,Another 50Ω matching filter capacitor.
+"C3, C4, C5",Capacitor,0402,100 nF,https://www.digikey.com/short/p2hrz2,$0.30,Power supply decoupling capacitors. Prefer X5/X7 ceramic capacitors.
+"C6, C7",Capacitor,0603,4.7 μF,https://www.digikey.com/short/p2hdqt,$0.34,SMPS decoupling capacitors for the built-in switching power supply. Prefer X5/X7 ceramic capacitors.
+"C8, C9",Capacitor,0402,10 pF,https://www.digikey.com/short/p2hrhj,$0.20,Filtering capacitors for the 32.768KHz 'Low-Speed External' crystal oscillator. Prefer high-quality C0G/NP0 ceramic capacitors.
+"C10, C11",Capacitor,0603,4.7 μF,https://www.digikey.com/short/p2hdqt,$0.34,Decoupling capacitors for the 3.3V voltage regulator. Prefer X5/X7 ceramic capacitors.
+C12,Capacitor,0402,10 nF,https://www.digikey.com/short/p2hr54,$0.10,Filtering capacitor that sits between the 2.45GHz bandpass filter and the antenna. Prefer X7 ceramic capacitor.
+C13,Capacitor,0402,10 nF,https://www.digikey.com/short/p2hr54,$0.10,Decoupling capacitor for the reset line.
+D1,Schottky Diode,SOD-323,"20-40V, 0.5-2A",https://www.digikey.com/short/p2hd37,$0.31,Schottky diode to protect against reverse polarity.
+D2,LED,0603,Your favorite color,https://www.digikey.com/short/p2hdpf,$0.14,LED indicator connected to pin E4.
+FL1,Filter,0805,2.45GHz bandpass,https://www.digikey.com/short/p2hndq,$0.24,Bandpass filter which goes between the 50Ω impedance matching network and the antenna.
+J1,Pins or Sockets,"0.1""",1x5,https://www.digikey.com/short/p2hd9v,$0.17,"Programming header; reset, SWDIO, SWCLK, ground, power input. These pin headers are commodities, and it's much chepaer to order them in bulk 1x40 rows."
+J2,USB A Plug,-,-,https://www.digikey.com/short/p2hn02,$1.30,"USB-A plug, since the chip has a USB peripheral."
+"J3, J4",Pins or Sockets,"0.1""",1x13,https://www.digikey.com/short/p2hdhn,$0.64,"GPIO pin headers, for plugging into a breadboard or socket."
+JP1,Jumper,0603,0Ω,https://www.digikey.com/short/p2hdnn,$0.10,Fit a jumper here to disable the internal switching power supply. Requires a corresponding firmware configuration.
+L1,Inductor,0402,2.7 nH,https://www.digikey.com/short/p2hn1q,$0.10,"50Ω matching filter inductor. Again, the value is from ST's reference design."
+L2,Ferrite Bead,0603,-,https://www.digikey.com/short/p2h080,$0.10,A ferrite bead to filter out high-frequency noise on the analog voltage pin.
+L3,Inductor,0805,10 μH,https://www.digikey.com/short/p2h03f,$0.14,Inductor for the internal switching power supply.
+R1,Resistor,0603,10 KΩ,https://www.digikey.com/short/p2hddd,$0.10,Pull-down resistor for the 'BOOT0' pin.
+R2,Resistor,0603,100 KΩ,https://www.digikey.com/short/p2hd0t,$0.10,"Pull-up resistor for the reset pin. This probably isn't needed since the chips have an internal ~47KΩ pull-up on this pin, but the reference design has a pull-up so I included one."
+R3,Resistor,0603,~1 KΩ,https://www.digikey.com/short/p2hdw9,$0.10,Resistor for the LED indicator. Adjust depending on how bright or dim you want the LED to be.
+U1,Microcontroller,QFN-48,STM32WB55Cx,https://www.digikey.com/short/p2hd4t,$6.65,Core microcontroller; available with either 512KB or 1MB of Flash memory.
+U2,Voltage Regulator,DFN-6,LFDM33PVR,https://www.digikey.com/short/p2hdm4,$0.75,500mA low-dropout linear voltage regulator.
+Y1,Crystal,3.2x1.5mm,32.768KHz,https://www.digikey.com/short/p2h0zh,$0.41,Low-Speed External' crystal oscillator.
+Y2,Crystal,2.0x1.6mm,32MHz,https://www.digikey.com/short/p2hdhc,$0.64,High-Speed External' crystal oscillator.
+Total:,-,-,-,-,$14.35,-
