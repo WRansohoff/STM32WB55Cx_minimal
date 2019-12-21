@@ -12,3 +12,15 @@ I tried to design this so that it could be soldered by hand if you don't have ac
 
 ![Board Top](renders/board_top.png)
 ![Board Bottom](renders/board_bot.png)
+
+# Future Work
+
+* Obviously, I need to write suitable firmwares to test the radio systems, USB communication, internal switching power supply, etc.
+
+* Instead of using a separate bandpass filter and impedance-matching network, it might be easier to use an integrated filter chip which ST designed for these microcontrollers; part #MLPF-WB55-01E3. It only costs about $0.30, and it seems less error-prone than blindly using the pi filter values from the reference schematics.
+
+* Adding an input button might be a good idea, to extend the range of potential applications.
+
+* I should add a switch or jumper connected to the `BOOT0` pin, because it looks like it is only possible to change or update the co-processor's radio firmware in DFU mode. Fortunately, with the current design, you can remove the 10K resistor on the bottom of the board and solder a jumper between the `BOOT0` side of its pad and the `VDD` side of the 100K resistor which is right next to it. But that's not a good solution.
+
+* Maybe I should move the `SWDIO`, `SWCLK`, and `NRST` pins to the two headers on either side of the board; it's unwieldy to have pin headers overhanging the USB plug.
