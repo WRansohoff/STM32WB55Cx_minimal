@@ -17,11 +17,9 @@ __attribute__( ( naked ) ) void reset_handler( void ) {
  */
 int main( void ) {
   // Copy initialized data from .sidata (Flash) to .data (RAM)
-  memcpy( ( void* )&_sdata,
-          ( const void* )&_sidata,
-          ( &_edata - &_sdata ) );
+  memcpy( &_sdata, &_sidata, ( ( void* )&_edata - ( void* )&_sdata ) );
   // Clear the .bss section in RAM.
-  memset( &_sbss, 0x00, ( &_ebss - &_sbss ) );
+  memset( &_sbss, 0x00, ( ( void* )&_ebss - ( void* )&_sbss ) );
 
   // Initial clock setup.
   clock_setup();
