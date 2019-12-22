@@ -17,11 +17,9 @@ __attribute__( ( naked ) ) void reset_handler( void ) {
  */
 int main( void ) {
   // Copy initialized data from .sidata (Flash) to .data (RAM)
-  memcpy( ( void* )&_sdata,
-          ( const void* )&_sidata,
-          ( &_edata - &_sdata ) );
+  memcpy( &_sdata, &_sidata, ( ( void* )&_edata - ( void* )&_sdata ) );
   // Clear the .bss section in RAM.
-  memset( &_sbss, 0x00, ( &_ebss - &_sbss ) );
+  memset( &_sbss, 0x00, ( ( void* )&_ebss - ( void* )&_sbss ) );
 
   // Enable GPIOA/B/C/E, USB, CRS peripherals.
   RCC->AHB2ENR   |= ( RCC_AHB2ENR_GPIOAEN |
@@ -30,6 +28,10 @@ int main( void ) {
                       RCC_AHB2ENR_GPIOEEN );
   RCC->APB1ENR1  |= ( RCC_APB1ENR1_CRSEN |
                       RCC_APB1ENR1_USBEN );
+
+  // Setup the NVIC hardware interrupts.
+  // Use 4 bits for 'priority' and 0 bits for 'subpriority'.
+  NVIC_SetPriorityGrouping( 0x00 );
 
   // Initial clock setup.
   clock_setup();
