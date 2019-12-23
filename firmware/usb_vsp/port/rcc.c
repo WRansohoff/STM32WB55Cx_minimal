@@ -74,6 +74,9 @@ void clock_setup( void ) {
   CRS->CR        |=  ( CRS_CR_AUTOTRIMEN |
                        CRS_CR_CEN );
 
+  // Disable USB power supply isolation.
+  PWR->CR2       |=  ( PWR_CR2_USV );
+
   // Setup the SysTick peripheral to a 1ms tick rate.
   SysTick_Config( core_clock_hz / 1000 );
 }
