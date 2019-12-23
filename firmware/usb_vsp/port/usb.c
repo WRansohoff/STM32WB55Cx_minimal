@@ -9,6 +9,9 @@ usb_ep_buf* btable = ( usb_ep_buf* )( 0x40006000 );
 
 // Initialize the USB peripheral for acting as a virtual serial port.
 void usb_init_vsp( usb_vsp* vsp ) {
+  // Exit power-down mode.
+  USB->CNTR   &= ~( USB_CNTR_PDWN );
+
   // Disable all USB interrupts in the USB peripheral.
   uint32_t usb_irq_flags = ( USB_CNTR_CTRM |
                              USB_CNTR_WKUPM |
@@ -19,7 +22,10 @@ void usb_init_vsp( usb_vsp* vsp ) {
                              USB_CNTR_RESETM |
                              USB_CNTR_L1REQM );
   USB->CNTR &= ~( usb_irq_flags );
+
   // Enable the 'low-priority' USB interrupt with a high priority.
+  // (The 'high-priority' interrupt seems to be used for isochronous
+  //  and double-buffered endpoints which require fast bulk transfers.)
   NVIC_SetPriority( USB_LP_IRQn,
                     NVIC_EncodePriority( 0x00, 0x01, 0x00 ) );
   NVIC_EnableIRQ( USB_LP_IRQn );
@@ -27,8 +33,6 @@ void usb_init_vsp( usb_vsp* vsp ) {
   // Force a USB reset by toggling the `FRES` bit.
   USB->CNTR   |=  ( USB_CNTR_FRES );
   USB->CNTR   &= ~( USB_CNTR_FRES );
-  // Exit power-down mode.
-  USB->CNTR   &= ~( USB_CNTR_PDWN );
   // Clear all pending USB interrupts.
   USB->ISTR    =  ( 0 );
   // Set BTABLE address to a PMA offset of 0.
