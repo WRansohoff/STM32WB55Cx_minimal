@@ -11,12 +11,11 @@
 #include "ringbuf.h"
 
 // Preprocessor definitions.
-// USB device / peripheral status.
-#define USB_STAT_OFF   ( -2 )
-#define USB_STAT_ERR   ( -1 )
-#define USB_STAT_IDLE  ( 0 )
-#define USB_STAT_BUSY  ( 1 )
-#define USB_STAT_LOCK  ( 2 )
+// Endpoint addresses.
+#define USB_EPA_CTRL_R ( 0x0 )
+#define USB_EPA_CTRL_W ( 0x8 )
+#define USB_EPA_VSP_R  ( 0x1 )
+#define USB_EPA_VSP_W  ( 0x9 )
 
 typedef struct {
   uint16_t tx_addr;
@@ -29,7 +28,6 @@ extern usb_ep_buf* btable;
 
 // Supporting struct to hold state for a USB virtual serial port.
 typedef struct {
-  int status;
   ringbuf* tx_buf;
   ringbuf* rx_buf;
 } usb_vsp;
